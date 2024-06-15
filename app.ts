@@ -31,12 +31,13 @@ app.get("/", logFunc, async (req: Request, res: Response) => {
 
     res.setHeader("Content-Type", "application/json");
     res.send(JSON.stringify(data));
+  } else {
+    res.setHeader('Content-Type', "text/html")
+    let htmlStr = "<h1>Fail to fetch URL!</h1> \n USAGE EXAMPLE : <a href='http://184.168.124.26:8080/?url=https://www.agoda.com/de-de/hotel-laudinella_3/hotel/saint-moritz-ch.html'>http://184.168.124.26:8080/?url=https://www.agoda.com/de-de/hotel-laudinella_3/hotel/saint-moritz-ch.html</a>"
+    res.send(
+      Buffer.from(htmlStr)
+    );
   }
-  if (!req.query) {
-    res.sendFile(path.join(__dirname, "/static/index.html"));
-  }
-
-  //   res.send("A");
 });
 
 app.get("/ping", logFunc, (req, res) => {
