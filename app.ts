@@ -27,11 +27,12 @@ app.get("/", async (req: Request, res: Response) => {
   //   res.send("A");
 });
 
-const port = 3000;
+app.get("/ping", (req, res) => res.send("PONG"));
+
+const port = process.env.PORT || 8080;
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
-
 
 export default app;

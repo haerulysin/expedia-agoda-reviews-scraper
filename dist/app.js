@@ -22,13 +22,13 @@ app.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const { url } = req.query;
         let travelName = url.toString().match(/https:\/\/www\.(\w+)/)[1];
         let data = null;
-        if (travelName === 'expedia') {
+        if (travelName === "expedia") {
             data = yield (0, expedia_1.default)(url.toString());
         }
-        if (travelName === 'agoda') {
+        if (travelName === "agoda") {
             data = yield (0, agoda_1.default)(url.toString());
         }
-        res.setHeader('Content-Type', 'application/json');
+        res.setHeader("Content-Type", "application/json");
         res.send(JSON.stringify(data));
     }
     if (!req.query) {
@@ -40,3 +40,4 @@ const port = 3000;
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
+exports.default = app;
