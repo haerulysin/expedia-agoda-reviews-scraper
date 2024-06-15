@@ -8,6 +8,12 @@ importers:
 
   .:
     dependencies:
+      '@sparticuz/chromium':
+        specifier: ^123.0.1
+        version: 123.0.1
+      '@sparticuz/chromium-min':
+        specifier: ^123.0.1
+        version: 123.0.1
       axios:
         specifier: ^1.7.2
         version: 1.7.2
@@ -131,6 +137,14 @@ packages:
 
   '@sinclair/typebox@0.25.24':
     resolution: {integrity: sha512-XJfwUVUKDHF5ugKwIcxEgc9k8b7HbznCp6eUfWgu710hMPNIO4aw4/zB5RogDQz8nd6gyCDpU9O/m6qYEWY6yQ==}
+
+  '@sparticuz/chromium-min@123.0.1':
+    resolution: {integrity: sha512-xB0lGecfZQf1rQZi+x0vA97zrrDBH5opgrZIxzI+ITrwXKeJtBOrXMv5L2dEpHDq9bMBXXhdGap0P7iCDSUvPg==}
+    engines: {node: '>= 16'}
+
+  '@sparticuz/chromium@123.0.1':
+    resolution: {integrity: sha512-RPrA99xrddbXXZjhUH1WZkTCK3QDQ77t/0y+vULtiW1uAlWLBxorxGnNTuzBDk6eNolxOVFrXZ2aoAN+/eB5TA==}
+    engines: {node: '>= 16'}
 
   '@tootallnate/once@2.0.0':
     resolution: {integrity: sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==}
@@ -2082,6 +2096,20 @@ snapshots:
       picomatch: 2.3.1
 
   '@sinclair/typebox@0.25.24': {}
+
+  '@sparticuz/chromium-min@123.0.1':
+    dependencies:
+      follow-redirects: 1.15.6
+      tar-fs: 3.0.5
+    transitivePeerDependencies:
+      - debug
+
+  '@sparticuz/chromium@123.0.1':
+    dependencies:
+      follow-redirects: 1.15.6
+      tar-fs: 3.0.5
+    transitivePeerDependencies:
+      - debug
 
   '@tootallnate/once@2.0.0': {}
 

@@ -1,8 +1,6 @@
 import axios from "axios";
-import puppeteer from "puppeteer";
-import fs from "fs";
-
-
+import puppeteer, { Browser } from "puppeteer";
+import chromium from '@sparticuz/chromium-min';
 async function scrapeAgodaReviews(hotelId: number) {
     console.log(hotelId)
   let postData = JSON.stringify({
@@ -61,7 +59,21 @@ async function scrapeAgodaReviews(hotelId: number) {
 }
 
 export default async function startAgoda(url: string) {
-  const browser = await puppeteer.launch();
+  let browser:Browser | undefined | null;
+  if(process.env.NODE_ENV === 'production'){
+    chromium.setGraphicsMode = false;
+    chromium.setHeadlessMode = true;
+    browser = await puppeteer.launch({
+      args:chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath("https://github.com/Sparticuz/chromium/releases/download/v123.0.1/chromium-v123.0.1-pack.tar"),
+      headless: chromium.headless,
+      ignoreHTTPSErrors:true
+
+    })
+  }else{
+    browser = await puppeteer.launch();
+  }
   const page = await browser.newPage();
 
   const resp = await page.goto(url);
