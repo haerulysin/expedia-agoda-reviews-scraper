@@ -1,4 +1,14 @@
 {
+	"main": "app.ts",
+	"scripts": {
+		"start": "ts-node app.ts",
+		"dev": "nodemon app.ts",
+		"build": "tsc",
+		"start:dist": "node dist/src/index.js",
+		"lint": "eslint --fix src test",
+		"test": "jest",
+		"typecheck": "tsc --noEmit"
+	},
 	"dependencies": {
 		"axios": "^1.7.2",
 		"express": "^4.19.2",
@@ -14,18 +24,6 @@
 	"nodemonConfig": {
 		"events": {}
 	},
-	"scripts": {
-		"start": "nodemon src/index.ts",
-		"build": "rimraf dist && tsc",
-		"ts.check": "tsc --project tsconfig.json",
-		"add-build": "git add dist",
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"pre-commit": [
-		"ts.check",
-		"build",
-		"add-build"
-	],
 	"devDependencies": {
 		"@types/express": "^4.17.21",
 		"@types/request": "^2.48.12",
