@@ -27,7 +27,10 @@ app.get("/", async (req: Request, res: Response) => {
   //   res.send("A");
 });
 
-app.get("/ping", (req, res) => res.send("PONG"));
+app.get("/ping", (req, res) => {
+  console.log(process.env.NODE_ENV);
+  res.send("PONG");
+});
 
 const port = process.env.PORT || 8080;
 
