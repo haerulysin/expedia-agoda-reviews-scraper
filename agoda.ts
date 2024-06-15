@@ -1,8 +1,8 @@
 import axios from "axios";
 import puppeteer, { Browser } from "puppeteer";
-import chromium from '@sparticuz/chromium-min';
+import chromium from "@sparticuz/chromium-min";
 async function scrapeAgodaReviews(hotelId: number) {
-    console.log(hotelId)
+  console.log(hotelId);
   let postData = JSON.stringify({
     hotelId,
     hotelProviderId: 332,
@@ -59,21 +59,25 @@ async function scrapeAgodaReviews(hotelId: number) {
 }
 
 export default async function startAgoda(url: string) {
-  let browser:Browser | undefined | null;
-  if(process.env.NODE_ENV === 'production'){
-    chromium.setGraphicsMode = false;
-    chromium.setHeadlessMode = true;
-    browser = await puppeteer.launch({
-      args:chromium.args,
-      defaultViewport: chromium.defaultViewport,
-      executablePath: await chromium.executablePath("https://github.com/Sparticuz/chromium/releases/download/v123.0.1/chromium-v123.0.1-pack.tar"),
-      headless: chromium.headless,
-      ignoreHTTPSErrors:true
+  let browser: Browser | undefined | null;
+  // if(process.env.NODE_ENV !== 'production'){
+  //   chromium.setGraphicsMode = false;
+  //   chromium.setHeadlessMode = true;
+  //   // browser = await puppeteer.launch({
+  //   //   args:chromium.args,
+  //   //   defaultViewport: chromium.defaultViewport,
+  //   //   executablePath: await chromium.executablePath("https://github.com/Sparticuz/chromium/releases/download/v123.0.1/chromium-v123.0.1-pack.tar"),
+  //   //   headless: chromium.headless,
+  //   //   ignoreHTTPSErrors:true
 
-    })
-  }else{
-    browser = await puppeteer.launch();
-  }
+  //   // })
+
+  //   browser = puppeteer.connect({browserWSEndpoint:"https://production-sfo.browserless.io?token=GOES-HERE"})
+  // }else{
+  //   browser = await puppeteer.launch();
+  // }
+
+  browser = await puppeteer.launch();
   const page = await browser.newPage();
 
   const resp = await page.goto(url);
@@ -86,4 +90,3 @@ export default async function startAgoda(url: string) {
 
   return await scrapeAgodaReviews(Number(hotelId));
 }
-

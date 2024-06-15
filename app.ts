@@ -1,10 +1,22 @@
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import path from "path";
 import startExpedia from "./expedia";
 import startAgoda from "./agoda";
+import fs from "fs";
 const app = express();
 
-app.get("/", async (req: Request, res: Response) => {
+function logFunc(req: Request, res: Response, next: NextFunction) {
+  let logObj: { [k: string]: any } = {};
+  logObj.url = req.originalUrl;
+  logObj.userAgent = req.get("User-Agent");
+  logObj.ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+  fs.appendFile("./log.txt", `${JSON.stringify(logObj)}\n`, (err) => {
+    if (err) console.log(err);
+  });
+  next();
+}
+
+app.get("/", logFunc, async (req: Request, res: Response) => {
   if (req.query.url) {
     const { url } = req.query;
     let travelName = url.toString().match(/https:\/\/www\.(\w+)/)![1];
@@ -27,8 +39,7 @@ app.get("/", async (req: Request, res: Response) => {
   //   res.send("A");
 });
 
-app.get("/ping", (req, res) => {
-  console.log(process.env.NODE_ENV);
+app.get("/ping", logFunc, (req, res) => {
   res.send("PONG");
 });
 
