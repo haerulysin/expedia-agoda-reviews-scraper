@@ -30,7 +30,6 @@
 		"@types/request-promise-native": "^1.0.21",
 		"pre-commit": "^1.2.2",
 		"rimraf": "^5.0.7",
-		"tsc": "^2.0.4",
 		"typescript": "^5.4.5"
 	}
 }
